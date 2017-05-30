@@ -9,6 +9,11 @@
     - nxos_upgrade
     - fw_upgrade
 
+- name: Set switch to boot from new NXOS
+  nxos_command:
+    commands: boot system bootflash://sup-active/"{{ firmware_nxos_filename }}"
+    host: "{{ inventory_hostname }}"
+
 - block:
   - name: Set switch to boot from new NXOS
     nxos_command:
