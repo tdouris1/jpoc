@@ -20,7 +20,7 @@
 #      msg: "Incompatibilites detected in firmware upgrade: {{ nxos_incompatibility.response[0].body.TABLE_incompat_all.ROW_incompat_all }}"
 #    when: (firmware_nxos_filename != "{{ show_version.response[0].body.kick_file_name | basename }}") and
 #          (nxos_incompatibility.response[0].body.TABLE_incompat_all.ROW_incompat_all[1].Str1 != "No incompatible configurations")
-
+#
   - name: Set switch to boot from new NXOS
     nxos_command:
       commands: boot nxos bootflash:/"{{ firmware_nxos_filename }}"
