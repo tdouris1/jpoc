@@ -4,7 +4,6 @@
   nxos_command:
     command: show version
     host: "{{ inventory_hostname }}"
-    type: show
   register: show_version
   tags:
     - nxos_upgrade
