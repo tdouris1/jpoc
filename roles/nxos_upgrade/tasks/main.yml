@@ -11,14 +11,10 @@
 
 - name: Set switch to boot from new NXOS
   nxos_command:
-    commands: boot system bootflash://sup-active/"{{ firmware_nxos_filename }}"
+    commands: boot system bootflash://sup-active/{{ firmware_nxos_filename }}
     host: "{{ inventory_hostname }}"
 
 - block:
-  - name: Set switch to boot from new NXOS
-    nxos_command:
-      commands: boot system bootflash://sup-active/"{{ firmware_nxos_filename }}"
-      host: "{{ inventory_hostname }}"
 
   - name: Save config with new NXOS boot command
     nxos_config:
@@ -48,15 +44,15 @@
       host: "{{ inventory_hostname }}"
     register: new_show_version
 
-  - name: Fail if running firmware is incorrect
-    fail:
-      msg: "Firmware was not upgraded"
-    when: (firmware_nxos_filename != "{{ show_version.response[0].body.kick_file_name | basename }}") and
-          (firmware_nxos_filename != "{{ new_show_version.response[0].body.kick_file_name | basename }}")
-  when: firmware_nxos_filename != "{{ show_version.response[0].body.kick_file_name | basename }}"
-  tags:
-    - nxos_upgrade
-    - fw_upgrade
+#  - name: Fail if running firmware is incorrect
+#    fail:
+#      msg: "Firmware was not upgraded"
+#    when: (firmware_nxos_filename != "{{ show_version.response[0].body.kick_file_name | basename }}") and
+#          (firmware_nxos_filename != "{{ new_show_version.response[0].body.kick_file_name | basename }}")
+#  when: firmware_nxos_filename != "{{ show_version.response[0].body.kick_file_name | basename }}"
+#  tags:
+#    - nxos_upgrade
+#    - fw_upgrade
   # End block
 
 # EPLD upgrade is not part of block since it's not possible to check EPLD version without
