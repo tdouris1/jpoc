@@ -23,7 +23,7 @@
 #
   - name: Set switch to boot from new NXOS
     nxos_command:
-      commands: boot system bootflash:/"{{ firmware_nxos_filename }}"
+      commands: boot system bootflash://sup-active/"{{ firmware_nxos_filename }}"
       host: "{{ inventory_hostname }}"
 
   - name: Save config with new NXOS boot command
