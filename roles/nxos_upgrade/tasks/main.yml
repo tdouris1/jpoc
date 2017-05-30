@@ -4,8 +4,6 @@
   nxos_command:
     command: show version
     host: "{{ inventory_hostname }}"
-    username: "{{ switch_username }}"
-    password: "{{ switch_password }}"
     type: show
   register: show_version
   when: show_version is not defined
@@ -17,8 +15,6 @@
     nxos_command:
       command: "show incompatibility-all nxos {{ firmware_nxos_filename }}"
       host: "{{ inventory_hostname }}"
-      username: "{{ switch_username }}"
-      password: "{{ switch_password }}"
       type: show
     register: nxos_incompatibility
   - name: Fail if incompatibilities are detected.
@@ -31,22 +27,16 @@
     nxos_command:
       command: "boot nxos bootflash:/{{ firmware_nxos_filename }}"
       host: "{{ inventory_hostname }}"
-      username: "{{ switch_username }}"
-      password: "{{ switch_password }}"
       type: config
 
   - name: Save config with new NXOS boot command
     nxos_config:
       save: True
       host: "{{ inventory_hostname }}"
-      username: "{{ switch_username }}"
-      password: "{{ switch_password }}"
 
   - name: Upgrade NXOS firmware (This will take an extended period of time.)
     nxos_upgrade:
       host: "{{ inventory_hostname }}"
-      username: "{{ switch_username }}"
-      password: "{{ switch_password }}"
       filename: "{{ firmware_nxos_filename }}"
       type: nxos
       log: "{{ enable_logging }}"
@@ -65,8 +55,6 @@
     nxos_command:
       command: show version
       host: "{{ inventory_hostname }}"
-      username: "{{ switch_username }}"
-      password: "{{ switch_password }}"
       type: show
     register: new_show_version
 
@@ -89,8 +77,6 @@
   - name: Upgrade EPLD firmware (This will take an extended period of time.)
     nxos_upgrade:
       host: "{{ inventory_hostname }}"
-      username: "{{ switch_username }}"
-      password: "{{ switch_password }}"
       filename: "{{ firmware_epld_filename }}"
       type: epld
       log: "{{ enable_logging }}"
