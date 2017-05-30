@@ -10,17 +10,6 @@
     - fw_upgrade
 
 - block:
-#  - name: Check for configuration incompatibility
-#    nxos_command:
-#      commands: "show incompatibility-all nxos {{ firmware_nxos_filename }}"
-#      host: "{{ inventory_hostname }}"
-#    register: nxos_incompatibility
-#  - name: Fail if incompatibilities are detected.
-#    fail:
-#      msg: "Incompatibilites detected in firmware upgrade: {{ nxos_incompatibility.response[0].body.TABLE_incompat_all.ROW_incompat_all }}"
-#    when: (firmware_nxos_filename != "{{ show_version.response[0].body.kick_file_name | basename }}") and
-#          (nxos_incompatibility.response[0].body.TABLE_incompat_all.ROW_incompat_all[1].Str1 != "No incompatible configurations")
-#
   - name: Set switch to boot from new NXOS
     nxos_command:
       commands: boot system bootflash://sup-active/"{{ firmware_nxos_filename }}"
