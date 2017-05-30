@@ -73,27 +73,27 @@
 # having the file on the switch. The install procedure is run as it doesn't take much
 # longer than the check, and will not upgrade unless necessary.
 
-- block:
-  - name: Upgrade EPLD firmware (This will take an extended period of time.)
-    nxos_upgrade:
-      host: "{{ inventory_hostname }}"
-      filename: "{{ firmware_epld_filename }}"
-      type: epld
-      log: "{{ enable_logging }}"
-      log_file: "{{ log_file_dir }}/{{ inventory_hostname }}-epld_upgrade_log_file.txt"
-    register: epld_upgrade
-    tags:
-      - epld_upgrade
-      - fw_upgrade
-
-  - name: Wait for Nexus Switch to reload
-    wait_for:
-      host: "{{ inventory_hostname }}"
-      port: 80
-      state: started
-      delay: 60
-      timeout: 300
-    when: epld_upgrade|changed
-  tags:
-    - epld_upgrade
-    - fw_upgrade
+#- block:
+#  - name: Upgrade EPLD firmware (This will take an extended period of time.)
+#    nxos_upgrade:
+#      host: "{{ inventory_hostname }}"
+#      filename: "{{ firmware_epld_filename }}"
+#      type: epld
+#      log: "{{ enable_logging }}"
+#      log_file: "{{ log_file_dir }}/{{ inventory_hostname }}-epld_upgrade_log_file.txt"
+#    register: epld_upgrade
+#    tags:
+#      - epld_upgrade
+#      - fw_upgrade
+#
+#  - name: Wait for Nexus Switch to reload
+#    wait_for:
+#      host: "{{ inventory_hostname }}"
+#      port: 80
+#      state: started
+#      delay: 60
+#      timeout: 300
+#    when: epld_upgrade|changed
+#  tags:
+#    - epld_upgrade
+#    - fw_upgrade
