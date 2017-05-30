@@ -6,10 +6,10 @@
     host: "{{ inventory_hostname }}"
     type: show
   register: show_version
-  when: show_version is not defined
   tags:
     - nxos_upgrade
     - fw_upgrade
+
 - block:
   - name: Check for configuration incompatibility
     nxos_command:
