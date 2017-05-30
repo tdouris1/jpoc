@@ -2,7 +2,7 @@
 # tasks file for roles/nxos_upgrade
 - name: Check running NXOS code version
   nxos_command:
-    command: show version
+    commands: show version
     host: "{{ inventory_hostname }}"
   register: show_version
   tags:
@@ -12,7 +12,7 @@
 - block:
   - name: Check for configuration incompatibility
     nxos_command:
-      command: "show incompatibility-all nxos {{ firmware_nxos_filename }}"
+      commands: "show incompatibility-all nxos {{ firmware_nxos_filename }}"
       host: "{{ inventory_hostname }}"
     register: nxos_incompatibility
   - name: Fail if incompatibilities are detected.
@@ -23,7 +23,7 @@
 
   - name: Set switch to boot from new NXOS
     nxos_command:
-      command: "boot nxos bootflash:/{{ firmware_nxos_filename }}"
+      commands: "boot nxos bootflash:/{{ firmware_nxos_filename }}"
       host: "{{ inventory_hostname }}"
 
   - name: Save config with new NXOS boot command
@@ -50,7 +50,7 @@
   # Verify that switch is running correct code
   - name: Check running NXOS code version
     nxos_command:
-      command: show version
+      commands: show version
       host: "{{ inventory_hostname }}"
     register: new_show_version
 
