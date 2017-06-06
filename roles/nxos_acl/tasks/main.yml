@@ -1,0 +1,12 @@
+---
+- name: configure interface settings
+  nxos_config:
+    host: "{{ inventory_hostname }}"
+    lines:
+      - 100 permit ip host 1.1.1.1 any
+      - 200 permit ip host 2.2.2.2 any
+      - 300 permit ip host 3.3.3.3 any
+      - 400 permit ip host 4.4.4.4 any
+      - 500 permit ip host 5.5.5.5 any
+      - 600 permit ip host 6.6.6.6 any
+    parents: ip access-list Ansible
