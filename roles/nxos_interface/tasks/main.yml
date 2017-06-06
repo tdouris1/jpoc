@@ -1,5 +1,5 @@
 ---
-- name: Show Version and Show interfaces
+- name: Sets interface information
   nxos_interface:
     host: "{{ inventory_hostname }}"
     interface: "{{ interface }}"
