@@ -1,0 +1,12 @@
+---
+- hosts: all
+  connection: local
+  gather_facts: no
+  
+  tasks:
+  - name: show ver
+    ios_command:
+      host: '{{ inventory_hostname }}'
+      commands:
+        - show version
+        
